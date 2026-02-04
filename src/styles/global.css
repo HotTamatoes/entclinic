@@ -1,0 +1,67 @@
+:root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    color-scheme: light dark;
+    --text-color: hsla(0,0%,0%,1);
+    --primary-color: hsla(0,0%,87%,1);
+    --darker-color: hsla(0,0%,100%,1);
+    --lighter-color: hsla(0,0%,60%,1);
+    --lightest-color: hsla(0,0%,33%,1);
+    --hover-color: hsla(0,0%,73%,1);
+    --button-hover: hsla(237,100%,70%,1);
+}
+html {
+    color: var(--text-color);
+}
+body {
+    background-color: var(--primary-color);
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 100vw;
+    min-width: 100dvw;
+    min-height: calc(100vh - 4.625em);
+    min-height: calc(100dvh - 4.625em);
+    overflow: hidden
+}
+
+a {
+    text-decoration: inherit;
+    color: var(--text-color);
+}
+a:hover {
+    color: var(--button-hover);
+}
+
+h1 {
+    font-size: 2.4em;
+    line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --text-color: hsla(0,0,89, 1);
+        --primary-color: hsla(0,0,14,1);
+        --darker-color: hsla(0,0,10,1);
+        --lighter-color: hsla(0,0,27,1);
+        --lightest-color: hsla(0,0,56,1);
+        --hover-color: hsla(0,0,75,1);
+        --button-hover: hsla(237,100,70,1);
+    }
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-top: 6.5em;
+        padding-bottom: unset;
+        min-height: calc(100vh - 6.5em);
+        min-height: calc(100dvh - 6.5em);
+    }
+}

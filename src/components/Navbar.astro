@@ -1,6 +1,6 @@
 ---
+import '../styles/global.css';
 import logo from '../assets/astro.svg'
-import './Navbar.css'
 import Searchbar from './Searchbar.astro'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faHouse, faBook, faMapLocationDot, faCircleCheck, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
@@ -19,16 +19,126 @@ import Searchbar from './Searchbar.astro'
         </a>
     </div>
     <div class="navbarText">
-        <a href="/">Home</a>
-        <a href="/about/">ABOUT</a>
-        <a href="/blog/">Blog</a>
-        <a href="/tinnitus">TINNITUS</a>
-        <a href="/stories">STORIES</a>
-        <a href="/services">SERVICES</a>
-        <a href="/specialists">SPECIALISTS</a>
-        <a href="/learn">LEARN</a>
-    </div>
-    <div class="navbarIcon">
+        <a class="" href="/" aria-label="home">Home</a>
+        <a class="" href="/about/" aria-label="about">ABOUT</a>
+        <a class="" href="/blog/" aria-label="blog">Blog</a>
+        <a class="" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
+        <a class="" href="/stories" aria-label="stories">STORIES</a>
+        <a class="" href="/services" aria-label="services">SERVICES</a>
+        <a class="" href="/specialists" aria-label="specialists">SPECIALISTS</a>
+        <a class="" href="/learn" aria-label="learn">LEARN</a>
     </div>
     <Searchbar />
 </div>
+
+
+<style>
+    .caveat {
+        font-family: "Caveat", cursive;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+        padding-right: 0.5em;
+    }
+
+    .headbar {
+        position: fixed;
+        flex-direction: column;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        width: 100dvw;
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        background-color: var(--darker-color);
+        color: var(--text-color);
+        z-index: 10;
+    }
+
+    .logobox {
+        display: none;
+    }
+
+    .logo {
+        height: 4em;
+        padding: 1em;
+        will-change: filter;
+        transition: filter 300ms;
+    }
+    .logo:hover {
+        filter: drop-shadow(0 0 2em #646cffaa);
+    }
+
+    .navbarIcon {
+        display: flex;
+        flex-direction: row;
+        font-size: 3em;
+        background-color: var(--primary-color);
+    }
+
+    .navbarIcon a {
+        background-color: var(--lighter-color);
+        color: var(--text-color);
+        flex-grow: 1;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.25s;
+    }
+    .navbarIcon a:hover {
+        background-color: var(--hover-color);
+    }
+    .navbarIcon a.active {
+        border-bottom: 2px solid var(--hover-color);
+    }
+
+    .navbarText {
+        font-family: Arial, Helvetica, sans-serif;
+        display: none;
+        margin-top: auto;
+        bottom: 0;
+    }
+
+    .navbarText a {
+        background-color: var(--lighter-color);
+        color: var(--text-color);
+        float: left;
+        font-size: 1em;
+        font-weight: 600;
+        text-align: center;
+        padding: 0.6em 1.2em;
+        text-decoration: none;
+        transition: background-color 0.25s;
+    }
+    .navbarText a:hover {
+        background-color: var(--hover-color);
+    }
+    .navbarText a.active {
+        border-bottom: 2px solid var(--hover-color);
+    }
+
+    @media (min-width: 768px) {
+        .warning {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .logobox{
+            display: flex;
+            white-space: nowrap;
+        }
+        .navbarIcon {
+            display: none;
+        }
+        .navbarText {
+            display:flex;
+        }
+        .headbar {
+            position: absolute;
+            flex-direction: row;
+            top: 0;
+            bottom: unset;
+        }
+    }
+</style>
