@@ -16,22 +16,22 @@ import Searchbar from './Searchbar.astro'
                 <h1 class="caveat">ENT Clinic</h1>
             </a>
         </div>
-        <a class="nav__trigger" href="#" aria-label="Toggle navigation"><span class="nav__icon"></span></a>
+        <a class="nav-trigger" href="#" aria-label="Toggle navigation"><span class="nav-icon"></span></a>
         <nav class="nav">
-            <a class="nav__link" href="/" aria-label="home">HOME</a>
-            <a class="nav__link" href="/about" aria-label="about">ABOUT</a>
-            <a class="nav__link" href="/blog" aria-label="blog">BLOG</a>
-            <a class="nav__link" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
-            <a class="nav__link" href="/stories" aria-label="stories">STORIES</a>
-            <a class="nav__link" href="/services" aria-label="services">SERVICES</a>
-            <a class="nav__link" href="/specialists" aria-label="specialists">SPECIALISTS</a>
-            <a class="nav__link" href="/learn" aria-label="learn">LEARN</a>
+            <a class="nav-link" href="/" aria-label="home">HOME</a>
+            <a class="nav-link" href="/about" aria-label="about">ABOUT</a>
+            <a class="nav-link" href="/blog" aria-label="blog">BLOG</a>
+            <a class="nav-link" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
+            <a class="nav-link" href="/stories" aria-label="stories">STORIES</a>
+            <a class="nav-link" href="/services" aria-label="services">SERVICES</a>
+            <a class="nav-link" href="/specialists" aria-label="specialists">SPECIALISTS</a>
+            <a class="nav-link" href="/learn" aria-label="learn">LEARN</a>
         </nav>
     </div>
 </nav>
 
 <script>
-    const trigger = document.querySelector('.nav__trigger');
+    const trigger = document.querySelector('.nav-trigger');
     trigger?.addEventListener('click', () => {
         document.body.classList.toggle('nav--active');
     });
@@ -98,17 +98,7 @@ import Searchbar from './Searchbar.astro'
         background-color: var(--nav-bg-active);
     }
 
-    .nav__list {
-        margin:0;
-        padding:10px;
-    }
-
-    .nav__item {
-        list-style-type: none;
-        text-align: left;
-    }
-
-    .nav__link {
+    .nav-link {
         font-size:1.3em;
         text-transform: uppercase;
         text-decoration: none;
@@ -116,7 +106,7 @@ import Searchbar from './Searchbar.astro'
         opacity:1;
         transition: opacity 300ms var(--ease);
     }
-    .nav__trigger {
+    .nav-trigger {
         display:block;
         position:absolute;
         width:30px;
@@ -126,11 +116,11 @@ import Searchbar from './Searchbar.astro'
         z-index:1000; 
     }
 
-    body.nav--active .nav__trigger {
+    body.nav--active .nav-trigger {
         opacity:0.5;
     }
 
-    .nav__icon {
+    .nav-icon {
         display: inline-block;
         position: relative;
         width:30px;
@@ -139,7 +129,7 @@ import Searchbar from './Searchbar.astro'
         transition-property: background-color, transform;
         transition-duration: var(--duration);
     }
-    .nav__icon::before, .nav__icon::after {
+    .nav-icon::before, .nav-icon::after {
         content: '';
         position: absolute;
         left: 0;
@@ -149,23 +139,23 @@ import Searchbar from './Searchbar.astro'
         transition: margin var(--duration), transform var(--duration);
     }
 
-    .nav__icon::before {
+    .nav-icon::before {
         margin-top: -10px;
     }
 
-    .nav__icon::after {
+    .nav-icon::after {
         margin-top: 10px;
     }
-    body.nav--active .nav__icon {
+    body.nav--active .nav-icon {
         background: rgba(0,0,0,0.0);
     }
         
-    body.nav--active .nav__icon::before {
+    body.nav--active .nav-icon::before {
         margin-top: 0;
         transform: rotate(45deg);
     }
 
-    body.nav--active .nav__icon::after {
+    body.nav--active .nav-icon::after {
         margin-top: 0;
         transform: rotate(-45deg);
     }
@@ -185,10 +175,10 @@ import Searchbar from './Searchbar.astro'
             display: flex;
             white-space: nowrap;
         }
-        .nav__trigger {
+        .nav-trigger {
             display: none;
         }
-        .nav__link {
+        .nav-link {
             color: var(--text-color);
         }
         .nav {
