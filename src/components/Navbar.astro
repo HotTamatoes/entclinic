@@ -18,16 +18,14 @@ import Searchbar from './Searchbar.astro'
         </div>
         <a class="nav__trigger" href="#" aria-label="Toggle navigation"><span class="nav__icon"></span></a>
         <nav class="nav">
-            <div class="navbarText">
-                <a class="nav__link" href="/" aria-label="home">HOME</a>
-                <a class="nav__link" href="/about" aria-label="about">ABOUT</a>
-                <a class="nav__link" href="/blog" aria-label="blog">BLOG</a>
-                <a class="nav__link" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
-                <a class="nav__link" href="/stories" aria-label="stories">STORIES</a>
-                <a class="nav__link" href="/services" aria-label="services">SERVICES</a>
-                <a class="nav__link" href="/specialists" aria-label="specialists">SPECIALISTS</a>
-                <a class="nav__link" href="/learn" aria-label="learn">LEARN</a>
-            </div>
+            <a class="nav__link" href="/" aria-label="home">HOME</a>
+            <a class="nav__link" href="/about" aria-label="about">ABOUT</a>
+            <a class="nav__link" href="/blog" aria-label="blog">BLOG</a>
+            <a class="nav__link" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
+            <a class="nav__link" href="/stories" aria-label="stories">STORIES</a>
+            <a class="nav__link" href="/services" aria-label="services">SERVICES</a>
+            <a class="nav__link" href="/specialists" aria-label="specialists">SPECIALISTS</a>
+            <a class="nav__link" href="/learn" aria-label="learn">LEARN</a>
         </nav>
     </div>
 </nav>
@@ -80,58 +78,15 @@ import Searchbar from './Searchbar.astro'
     .logo:hover {
         filter: drop-shadow(0 0 2em #646cffaa);
     }
-
-    .navbarIcon {
-        display: flex;
-        flex-direction: row;
-        font-size: 3em;
-        background-color: var(--primary-color);
-    }
-
-    .navbarIcon a {
-        background-color: var(--lighter-color);
-        color: var(--text-color);
-        flex-grow: 1;
-        text-align: center;
-        text-decoration: none;
-        transition: background-color 0.25s;
-    }
-    .navbarIcon a:hover {
-        background-color: var(--hover-color);
-    }
-    .navbarIcon a.active {
-        border-bottom: 2px solid var(--hover-color);
-    }
-
-    .navbarText {
-        font-family: Arial, Helvetica, sans-serif;
-        display: none;
-        margin-top: auto;
-        bottom: 0;
-    }
-
-    .navbarText a {
-        background-color: var(--lighter-color);
-        color: var(--text-color);
-        display: block;
-        float: none;
-        font-size: 1em;
-        font-weight: 600;
-        text-align: left;
-        padding: 0.8em 1.2em;
-        text-decoration: none;
-        transition: background-color 0.25s;
-    }
-    .navbarText a:hover {
-        background-color: var(--hover-color);
-    }
-    .navbarText a.active {
-        border-bottom: 2px solid var(--hover-color);
-    }
     
     /* https://codepen.io/adubiel/pen/yyWEVo */
     .nav {
+        display: flex;
+        flex-direction: column;
         position: absolute;
+        width:100%;
+        height:100%;
+        transform: translateX(100%);    
         z-index:100;  
         opacity:0;
         transition-property: all;
@@ -141,10 +96,6 @@ import Searchbar from './Searchbar.astro'
     body.nav--active .nav {
         opacity:1;
         background-color: var(--nav-bg-active);
-    }
-    body.nav--active .navbarText {
-        display: block;
-        flex-direction: column;
     }
 
     .nav__list {
@@ -161,7 +112,7 @@ import Searchbar from './Searchbar.astro'
         font-size:1.3em;
         text-transform: uppercase;
         text-decoration: none;
-        color: var(--nav-color);
+        color: var(--darker-color);
         opacity:1;
         transition: opacity 300ms var(--ease);
     }
@@ -219,12 +170,6 @@ import Searchbar from './Searchbar.astro'
         transform: rotate(-45deg);
     }
 
-    .nav {
-        width:100%;
-        height:100%;
-        transform: translateX(100%);    
-    }
-
     body.nav--active .nav {
         transform: translateX(20%);  
     }
@@ -243,8 +188,8 @@ import Searchbar from './Searchbar.astro'
         .nav__trigger {
             display: none;
         }
-        .navbarIcon {
-            display: none;
+        .nav__link {
+            color: var(--text-color);
         }
         .nav {
             position: static;
@@ -255,17 +200,6 @@ import Searchbar from './Searchbar.astro'
             background: transparent;
             transition: none;
             display: block;
-        }
-        .navbarText {
-            display:flex;
-            align-items:center;
-            margin-top: 0;
-        }
-        .navbarText a {
-            display: inline-block;
-            float: none;
-            padding: 0.6em 1em;
-            text-align: center;
         }
         .headbar {
             position: absolute;
