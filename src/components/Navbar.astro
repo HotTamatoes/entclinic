@@ -1,9 +1,26 @@
 ---
 import '../styles/global.css';
 import logo from '../assets/astro.svg'
-import Searchbar from './Searchbar.astro'
-//const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768)
-//const { postalCode } = useParams<{ postalCode: string }>()
+import type { StringValidation } from 'astro:schema';
+
+type link = {
+    href: string;
+    ariaLabel: string;
+    label: string;
+};
+
+const links: link[] = [
+    { href: '/', ariaLabel: 'home', label: 'Home' },
+    { href: '/about', ariaLabel: 'about', label: 'About' },
+    { href: '/blog', ariaLabel: 'blog', label: 'Blog' },
+    { href: '/tinnitus', ariaLabel: 'tinnitus', label: 'Tinnitus' },
+    { href: '/stories', ariaLabel: 'stories', label: 'Stories' },
+    { href: '/services', ariaLabel: 'services', label: 'Services' },
+    { href: '/specialists', ariaLabel: 'specialists', label: 'Specialists' },
+    { href: '/learn', ariaLabel: 'learn', label: 'Learn' }
+];
+
+const current = Astro.url.pathname;
 ---
 
 <nav>
@@ -18,14 +35,10 @@ import Searchbar from './Searchbar.astro'
         </div>
         <a class="nav-trigger" href="#" aria-label="Toggle navigation"><span class="nav-icon"></span></a>
         <nav class="nav">
-            <a class="nav-link" href="/" aria-label="home">HOME</a>
-            <a class="nav-link" href="/about" aria-label="about">ABOUT</a>
-            <a class="nav-link" href="/blog" aria-label="blog">BLOG</a>
-            <a class="nav-link" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
-            <a class="nav-link" href="/stories" aria-label="stories">STORIES</a>
-            <a class="nav-link" href="/services" aria-label="services">SERVICES</a>
-            <a class="nav-link" href="/specialists" aria-label="specialists">SPECIALISTS</a>
-            <a class="nav-link" href="/learn" aria-label="learn">LEARN</a>
+            {links.map(link => (
+                <a class={link.href == current ? "nav-link active-link" : "nav-link"} href={link.href} aria-label={link.ariaLabel}>{link.label}</a>
+            ))}
+            <span class="nav-goo"></span>
         </nav>
     </div>
 </nav>
@@ -41,6 +54,8 @@ import Searchbar from './Searchbar.astro'
     :root {
         --duration: 300ms;
         --ease: ease-in-out;
+        --goo-dur: 300ms;
+        --goo-ease: ease-out;
     }
     .caveat {
         font-family: "Caveat", cursive;
@@ -63,6 +78,9 @@ import Searchbar from './Searchbar.astro'
         background-color: var(--darker-color);
         color: var(--text-color);
         z-index: 150;
+    }
+    svg {
+        position: absolute;
     }
 
     .logobox {
@@ -87,20 +105,13 @@ import Searchbar from './Searchbar.astro'
         width:100%;
         height:100%;
         transform: translateX(100%);    
-        z-index:100;  
-        opacity:0;
+        z-index:100;
         transition-property: all;
         transition-duration: var(--duration);
     }
 
-    body.nav--active .nav {
-        opacity:1;
-        background-color: var(--nav-bg-active);
-    }
-
     .nav-link {
         font-size:1.3em;
-        text-transform: uppercase;
         text-decoration: none;
         color: var(--darker-color);
         opacity:1;
@@ -114,10 +125,6 @@ import Searchbar from './Searchbar.astro'
         right:10px;
         top:10px;
         z-index:1000; 
-    }
-
-    body.nav--active .nav-trigger {
-        opacity:0.5;
     }
 
     .nav-icon {
@@ -161,7 +168,7 @@ import Searchbar from './Searchbar.astro'
     }
 
     body.nav--active .nav {
-        transform: translateX(20%);  
+        transform: translateX(80%);  
     }
 
     @media (min-width: 768px) {
@@ -179,9 +186,60 @@ import Searchbar from './Searchbar.astro'
             display: none;
         }
         .nav-link {
+            position: relative;
             color: var(--text-color);
+            padding: 10px;
+            margin-right: 10px;
+            background: none;
+        }
+        .nav-link:before {
+            content: '';
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            position: absolute;
+            top: -2px;
+            left:-2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+        @keyframes glowing {
+            0% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        .nav-link:after {
+            z-index: -1;
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: var(--darker-color);
+            box-sizing: border-box;
+            border: 1px solid hsla(0,0%,0%,1);
+            border-radius: 10px;
+        }
+        .active-link:after {
+            border: 2px solid blue;
+        }
+        .nav-link:active {
+            color: #fff;
+        }
+        .nav-link:active:after {
+            background: transparent;
+            border: 1px solid transparent;
+        }
+        .nav-link:hover:before {
+            opacity: 1;
         }
         .nav {
+            float: right;
             position: static;
             opacity: 1 !important;
             transform: none !important;
@@ -189,7 +247,11 @@ import Searchbar from './Searchbar.astro'
             height: auto;
             background: transparent;
             transition: none;
-            display: block;
+            flex-direction: row;
+            margin-left: auto;
+            align-items: center;
+            filter:url('#shadowed-goo');
+            /*background:rgba(217, 255, 0, 0.2);*/
         }
         .headbar {
             position: absolute;
