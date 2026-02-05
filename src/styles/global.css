@@ -22,18 +22,6 @@
 html {
     color: var(--text-color);
 }
-body {
-    background-color: var(--nav-bg-active);
-    margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 100vw;
-    min-width: 100dvw;
-    min-height: calc(100vh - 4.625em);
-    min-height: calc(100dvh - 4.625em);
-    overflow: hidden
-}
-
 a {
     text-decoration: inherit;
     color: var(--text-color);
@@ -56,14 +44,5 @@ h1 {
         --lightest-color: hsla(0,0,56,1);
         --hover-color: hsla(0,0,75,1);
         --button-hover: hsla(237,100,70,1);
-    }
-}
-
-@media (min-width: 768px) {
-    body {
-        padding-top: 6.5em;
-        padding-bottom: unset;
-        min-height: calc(100vh - 6.5em);
-        min-height: calc(100dvh - 6.5em);
     }
 }
