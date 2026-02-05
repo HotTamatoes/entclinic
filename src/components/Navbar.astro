@@ -9,27 +9,29 @@ import Searchbar from './Searchbar.astro'
 //const { postalCode } = useParams<{ postalCode: string }>()
 ---
 
-<div class="headbar">
-    <div class="logobox">
-        <a href="/">
-            <img src={logo.src} class="logo" alt="MovieRouterLogo" />
-        </a>
-        <a href="/" style={{ color: 'var(--text-color)' }}>
-            <h1 class="caveat">ENT Clinic</h1>
-        </a>
+<nav>
+    <div class="headbar">
+        <div class="logobox">
+            <a href="/">
+                <img src={logo.src} class="logo" alt="MovieRouterLogo" />
+            </a>
+            <a href="/" style={{ color: 'var(--text-color)' }}>
+                <h1 class="caveat">ENT Clinic</h1>
+            </a>
+        </div>
+        <div class="navbarText">
+            <a class="" href="/" aria-label="home">Home</a>
+            <a class="" href="/about" aria-label="about">ABOUT</a>
+            <a class="" href="/blog" aria-label="blog">Blog</a>
+            <a class="" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
+            <a class="" href="/stories" aria-label="stories">STORIES</a>
+            <a class="" href="/services" aria-label="services">SERVICES</a>
+            <a class="" href="/specialists" aria-label="specialists">SPECIALISTS</a>
+            <a class="" href="/learn" aria-label="learn">LEARN</a>
+        </div>
+        <Searchbar />
     </div>
-    <div class="navbarText">
-        <a class="" href="/" aria-label="home">Home</a>
-        <a class="" href="/about/" aria-label="about">ABOUT</a>
-        <a class="" href="/blog/" aria-label="blog">Blog</a>
-        <a class="" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
-        <a class="" href="/stories" aria-label="stories">STORIES</a>
-        <a class="" href="/services" aria-label="services">SERVICES</a>
-        <a class="" href="/specialists" aria-label="specialists">SPECIALISTS</a>
-        <a class="" href="/learn" aria-label="learn">LEARN</a>
-    </div>
-    <Searchbar />
-</div>
+</nav>
 
 
 <style>
