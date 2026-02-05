@@ -2,9 +2,6 @@
 import '../styles/global.css';
 import logo from '../assets/astro.svg'
 import Searchbar from './Searchbar.astro'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faHouse, faBook, faMapLocationDot, faCircleCheck, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-
 //const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768)
 //const { postalCode } = useParams<{ postalCode: string }>()
 ---
@@ -19,22 +16,34 @@ import Searchbar from './Searchbar.astro'
                 <h1 class="caveat">ENT Clinic</h1>
             </a>
         </div>
-        <div class="navbarText">
-            <a class="" href="/" aria-label="home">Home</a>
-            <a class="" href="/about" aria-label="about">ABOUT</a>
-            <a class="" href="/blog" aria-label="blog">Blog</a>
-            <a class="" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
-            <a class="" href="/stories" aria-label="stories">STORIES</a>
-            <a class="" href="/services" aria-label="services">SERVICES</a>
-            <a class="" href="/specialists" aria-label="specialists">SPECIALISTS</a>
-            <a class="" href="/learn" aria-label="learn">LEARN</a>
-        </div>
-        <Searchbar />
+        <a class="nav__trigger" href="#" aria-label="Toggle navigation"><span class="nav__icon"></span></a>
+        <nav class="nav">
+            <div class="navbarText">
+                <a class="nav__link" href="/" aria-label="home">HOME</a>
+                <a class="nav__link" href="/about" aria-label="about">ABOUT</a>
+                <a class="nav__link" href="/blog" aria-label="blog">BLOG</a>
+                <a class="nav__link" href="/tinnitus" aria-label="tinnitus">TINNITUS</a>
+                <a class="nav__link" href="/stories" aria-label="stories">STORIES</a>
+                <a class="nav__link" href="/services" aria-label="services">SERVICES</a>
+                <a class="nav__link" href="/specialists" aria-label="specialists">SPECIALISTS</a>
+                <a class="nav__link" href="/learn" aria-label="learn">LEARN</a>
+            </div>
+        </nav>
     </div>
 </nav>
 
+<script>
+    const trigger = document.querySelector('.nav__trigger');
+    trigger?.addEventListener('click', () => {
+        document.body.classList.toggle('nav--active');
+    });
+</script>
 
 <style>
+    :root {
+        --duration: 300ms;
+        --ease: ease-in-out;
+    }
     .caveat {
         font-family: "Caveat", cursive;
         font-optical-sizing: auto;
@@ -48,14 +57,14 @@ import Searchbar from './Searchbar.astro'
         flex-direction: column;
         left: 0;
         right: 0;
-        bottom: 0;
+        top: 0;
         width: 100vw;
         width: 100dvw;
         font-family: Arial, Helvetica, sans-serif;
         display: flex;
         background-color: var(--darker-color);
         color: var(--text-color);
-        z-index: 10;
+        z-index: 150;
     }
 
     .logobox {
@@ -104,11 +113,12 @@ import Searchbar from './Searchbar.astro'
     .navbarText a {
         background-color: var(--lighter-color);
         color: var(--text-color);
-        float: left;
+        display: block;
+        float: none;
         font-size: 1em;
         font-weight: 600;
-        text-align: center;
-        padding: 0.6em 1.2em;
+        text-align: left;
+        padding: 0.8em 1.2em;
         text-decoration: none;
         transition: background-color 0.25s;
     }
@@ -117,6 +127,106 @@ import Searchbar from './Searchbar.astro'
     }
     .navbarText a.active {
         border-bottom: 2px solid var(--hover-color);
+    }
+    
+    /* https://codepen.io/adubiel/pen/yyWEVo */
+    .nav {
+        position: absolute;
+        z-index:100;  
+        opacity:0;
+        transition-property: all;
+        transition-duration: var(--duration);
+    }
+
+    body.nav--active .nav {
+        opacity:1;
+        background-color: var(--nav-bg-active);
+    }
+    body.nav--active .navbarText {
+        display: block;
+        flex-direction: column;
+    }
+
+    .nav__list {
+        margin:0;
+        padding:10px;
+    }
+
+    .nav__item {
+        list-style-type: none;
+        text-align: left;
+    }
+
+    .nav__link {
+        font-size:1.3em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--nav-color);
+        opacity:1;
+        transition: opacity 300ms var(--ease);
+    }
+    .nav__trigger {
+        display:block;
+        position:absolute;
+        width:30px;
+        height:25px;
+        right:10px;
+        top:10px;
+        z-index:1000; 
+    }
+
+    body.nav--active .nav__trigger {
+        opacity:0.5;
+    }
+
+    .nav__icon {
+        display: inline-block;
+        position: relative;
+        width:30px;
+        height:5px;
+        background-color: var(--nav-color);
+        transition-property: background-color, transform;
+        transition-duration: var(--duration);
+    }
+    .nav__icon::before, .nav__icon::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 30px;
+        height: 5px;
+        background-color: var(--nav-color);
+        transition: margin var(--duration), transform var(--duration);
+    }
+
+    .nav__icon::before {
+        margin-top: -10px;
+    }
+
+    .nav__icon::after {
+        margin-top: 10px;
+    }
+    body.nav--active .nav__icon {
+        background: rgba(0,0,0,0.0);
+    }
+        
+    body.nav--active .nav__icon::before {
+        margin-top: 0;
+        transform: rotate(45deg);
+    }
+
+    body.nav--active .nav__icon::after {
+        margin-top: 0;
+        transform: rotate(-45deg);
+    }
+
+    .nav {
+        width:100%;
+        height:100%;
+        transform: translateX(100%);    
+    }
+
+    body.nav--active .nav {
+        transform: translateX(20%);  
     }
 
     @media (min-width: 768px) {
@@ -130,17 +240,36 @@ import Searchbar from './Searchbar.astro'
             display: flex;
             white-space: nowrap;
         }
+        .nav__trigger {
+            display: none;
+        }
         .navbarIcon {
             display: none;
         }
+        .nav {
+            position: static;
+            opacity: 1 !important;
+            transform: none !important;
+            width: auto;
+            height: auto;
+            background: transparent;
+            transition: none;
+            display: block;
+        }
         .navbarText {
             display:flex;
+            align-items:center;
+            margin-top: 0;
+        }
+        .navbarText a {
+            display: inline-block;
+            float: none;
+            padding: 0.6em 1em;
+            text-align: center;
         }
         .headbar {
             position: absolute;
             flex-direction: row;
-            top: 0;
-            bottom: unset;
         }
     }
 </style>
