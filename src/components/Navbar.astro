@@ -38,7 +38,6 @@ const current = Astro.url.pathname;
             {links.map(link => (
                 <a class={link.href == current ? "nav-link active-link" : "nav-link"} href={link.href} aria-label={link.ariaLabel}>{link.label}</a>
             ))}
-            <span class="nav-goo"></span>
         </nav>
     </div>
 </nav>
@@ -51,19 +50,6 @@ const current = Astro.url.pathname;
 </script>
 
 <style>
-    :root {
-        --duration: 300ms;
-        --ease: ease-in-out;
-        --goo-dur: 300ms;
-        --goo-ease: ease-out;
-    }
-    .caveat {
-        font-family: "Caveat", cursive;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-        padding-right: 0.5em;
-    }
 
     .headbar {
         position: fixed;
@@ -101,21 +87,30 @@ const current = Astro.url.pathname;
     .nav {
         display: flex;
         flex-direction: column;
-        position: absolute;
+        position: fixed;
         width:100%;
-        height:100%;
-        transform: translateX(100%);    
-        z-index:100;
-        transition-property: all;
-        transition-duration: var(--duration);
+        transform: translateX(100%);
+        transition: all var(--duration) var(--ease);
+        margin-top: 50px;
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        animation: glowing 20s linear infinite;
+        background-size: 400%;
     }
 
     .nav-link {
         font-size:1.3em;
         text-decoration: none;
+        padding-left: 20px;
+        background-color: var(--nav-bg-active);
+        transition: background-color .3s ease-in-out;
+    }
+    .nav-link:hover {
+        background-color: transparent;
         color: var(--darker-color);
-        opacity:1;
-        transition: opacity 300ms var(--ease);
+    }
+    @keyframes glowing {
+        0% { background-position: 400% 0; }
+        100% { background-position: 0 0; }
     }
     .nav-trigger {
         display:block;
@@ -154,21 +149,23 @@ const current = Astro.url.pathname;
         margin-top: 10px;
     }
     body.nav--active .nav-icon {
-        background: rgba(0,0,0,0.0);
+        background: hsla(0,0%,0%,0);
     }
         
     body.nav--active .nav-icon::before {
         margin-top: 0;
-        transform: rotate(45deg);
+        transform: rotate(45deg);hsla(0,0%,100%,1);
+        background: hsla(0,0%,0%,1);
     }
 
     body.nav--active .nav-icon::after {
         margin-top: 0;
         transform: rotate(-45deg);
+        background: hsla(0,0%,0%,1);
     }
 
     body.nav--active .nav {
-        transform: translateX(80%);  
+        transform: translateX(77%);  
     }
 
     @media (min-width: 768px) {
@@ -208,10 +205,6 @@ const current = Astro.url.pathname;
             transition: opacity .3s ease-in-out;
             border-radius: 10px;
         }
-        @keyframes glowing {
-            0% { background-position: 400% 0; }
-            100% { background-position: 0 0; }
-        }
         .nav-link:after {
             z-index: -1;
             position: absolute;
@@ -250,8 +243,7 @@ const current = Astro.url.pathname;
             flex-direction: row;
             margin-left: auto;
             align-items: center;
-            filter:url('#shadowed-goo');
-            /*background:rgba(217, 255, 0, 0.2);*/
+            margin-top: 10px;
         }
         .headbar {
             position: absolute;
