@@ -14,9 +14,11 @@ import Nav from "../components/Navbar.astro";
 	</head>
 	<body>
 		<Nav />
-		<main class="page-content">
+		<main class="page">
 			<div class="inactive-box"></div>
-			<slot />
+			<div class="page-content">
+				<slot />
+			</div>
 		</main>
 	</body>
 </html>
@@ -37,33 +39,44 @@ import Nav from "../components/Navbar.astro";
 		background-color: var(--nav-bg-active);
 		display: flex;
 		place-items: center;
-		overflow: hidden
 	}
-    .page-content {
+    .page {
+		margin-top: 0px;
         transform: scale(1) translateX(0);
         transition: all var(--duration) var(--ease);
 		background-color: var(--primary-color);
-		overflow: auto;
-		max-width: 100vw;
-		max-width: 100dvw;
-		max-height: 100vh;
-		max-height: 100dvh;
+		width: 100dvw;
+		height: 100dvh;
+		position: relative;
+		overflow: hidden;
     }
 
-    body.nav--active .page-content {
+	.page-content {
+		position: relative;
+		overflow: auto;
+		max-height: 100%;
+		max-width: 100%;
+	}
+
+    body.nav--active .page {
         transform: scale(0.9) translateX(-40%);
     }
 
 	.inactive-box {
 		position: absolute;
-		width: 100%;
-		height: 100%;
+		inset: 0;
 		display: none;
 		background-color: transparent;
-		z-index: 1000;
+		z-index: 10;
 	}
 
 	body.nav--active .inactive-box {
 		display: block;
+	}
+
+    @media (min-width: 768px) {
+		.page {
+			margin-top: 205px;
+		}
 	}
 </style>
