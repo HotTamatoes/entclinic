@@ -185,7 +185,10 @@ const current = Astro.url.pathname;
         .nav-link {
             position: relative;
             color: var(--text-color);
-            padding: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 3px;
+            padding-bottom: 3px;
             margin-right: 10px;
             background: none;
         }
@@ -198,12 +201,12 @@ const current = Astro.url.pathname;
             background-size: 400%;
             z-index: -1;
             filter: blur(5px);
-            width: calc(100% + 4px);
-            height: calc(100% + 4px);
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
             animation: glowing 20s linear infinite;
             opacity: 0;
             transition: opacity .3s ease-in-out;
-            border-radius: 10px;
+            border-radius: 4px;
         }
         .nav-link:after {
             z-index: -1;
@@ -214,12 +217,12 @@ const current = Astro.url.pathname;
             left: 0;
             top: 0;
             background: var(--darker-color);
-            box-sizing: border-box;
+            border-radius: 4px;
+            /*box-sizing: border-box;
             border: 1px solid hsla(0,0%,0%,1);
-            border-radius: 10px;
         }
         .active-link:after {
-            border: 2px solid blue;
+            border: 2px solid blue;*/
         }
         .nav-link:active {
             color: #fff;
