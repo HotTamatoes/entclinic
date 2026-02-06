@@ -34,9 +34,11 @@ const current = Astro.url.pathname;
         </div>
         <a class="nav-trigger" href="#" aria-label="Toggle navigation"><span class="nav-icon"></span></a>
         <nav class="nav">
-            {links.map(link => (
-                <a class={link.href == current ? "nav-link active-link" : "nav-link"} href={link.href} aria-label={link.ariaLabel}>{link.label}</a>
-            ))}
+            <div class="linkbox">
+                {links.map(link => (
+                    <a class={link.href == current ? "nav-link active-link" : "nav-link"} href={link.href} aria-label={link.ariaLabel}>{link.label}</a>
+                ))}
+            </div>
             <div class="button-container">
                 <span class="mas">Book Now</span>
                 <a href="/contact" style={
@@ -91,6 +93,15 @@ const current = Astro.url.pathname;
         filter: drop-shadow(0 0 2em #646cffaa);
     }
     
+    .linkbox {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        animation: glowing 20s linear infinite;
+        background-size: 400%;
+    }
+
     /* https://codepen.io/adubiel/pen/yyWEVo */
     .nav {
         font-size:1.3em;
@@ -100,10 +111,6 @@ const current = Astro.url.pathname;
         width:100%;
         transform: translateX(100%);
         transition: all var(--duration) var(--ease);
-        margin-top: 50px;
-        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-        animation: glowing 20s linear infinite;
-        background-size: 400%;
     }
 
     .nav-link {
@@ -174,6 +181,90 @@ const current = Astro.url.pathname;
 
     body.nav--active .nav {
         transform: translateX(59%);  
+    }
+
+    /* https://codepen.io/pizza3/pen/qmerBv */
+    .button-container {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #000;
+        transition: 0.5s;
+        margin-right: auto;
+        padding: 3px 0px;
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        background-size: 400%;
+        animation: glowing 20s linear infinite;
+        margin-top: 20px;
+    }
+
+    .button-container a {
+        width: 101%;
+        height: 100%;
+        background: #000;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        animation: ani2 0.7s steps(29) forwards;
+        padding: 23px;
+    }
+
+    .button-container a:hover {
+        animation: ani 0.7s steps(29) forwards;
+    }
+    .mas {
+        position: absolute;
+        color: var(--darker-color);
+        text-align: center;
+        width: 101%;
+        overflow: hidden;
+    }
+
+    @-webkit-keyframes ani {
+        from {
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+        }
+
+        to {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+        }
+    }
+
+    @keyframes ani {
+        from {
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+        }
+
+        to {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+        }
+    }
+
+    @-webkit-keyframes ani2 {
+        from {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+        }
+
+        to {
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+        }
+    }
+
+    @keyframes ani2 {
+        from {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+        }
+
+        to {
+        -webkit-mask-position: 0 0;
+        mask-position: 0 0;
+        }
     }
 
     @media (min-width: 768px) {
@@ -252,99 +343,25 @@ const current = Astro.url.pathname;
             transform: none !important;
             width: auto;
             height: auto;
-            background: transparent;
             transition: none;
             flex-direction: row;
             margin-left: auto;
             align-items: center;
-            margin-top: 10px;
+        }
+        .linkbox {
+            flex-direction: row;
+            margin-left: auto;
+            align-items: center;
+            margin-top: 0;
+            background: transparent;
         }
         .headbar {
             position: absolute;
             flex-direction: row;
         }
-    }
-
-    /* https://codepen.io/pizza3/pen/qmerBv */
-    .button-container {
-        position: relative;
-        overflow: hidden;
-        border: 1px solid #000;
-        transition: 0.5s;
-        margin-right: 10px;
-        padding: 3px 0px;
-        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-        background-size: 400%;
-        animation: glowing 20s linear infinite;
-    }
-
-    .button-container a {
-        width: 101%;
-        height: 100%;
-        background: #000;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        animation: ani2 0.7s steps(29) forwards;
-        padding: 23px;
-    }
-
-    .button-container a:hover {
-        animation: ani 0.7s steps(29) forwards;
-    }
-    .mas {
-        position: absolute;
-        color: var(--darker-color);
-        text-align: center;
-        width: 101%;
-        overflow: hidden;
-    }
-
-    @-webkit-keyframes ani {
-        from {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
-        }
-
-        to {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-    }
-
-    @keyframes ani {
-        from {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
-        }
-
-        to {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-    }
-
-    @-webkit-keyframes ani2 {
-        from {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-
-        to {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
-        }
-    }
-
-    @keyframes ani2 {
-        from {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-
-        to {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
+        .button-container {
+            margin-right: 20px;
+            margin-top: 0;
         }
     }
 </style>
