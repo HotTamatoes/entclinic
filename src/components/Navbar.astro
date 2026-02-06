@@ -78,9 +78,9 @@ const current = Astro.url.pathname;
     svg {
         position: absolute;
     }
-
     .logobox {
-        display: none;
+        display: flex;
+        white-space: nowrap;
     }
 
     .logo {
@@ -96,7 +96,7 @@ const current = Astro.url.pathname;
     .linkbox {
         display: flex;
         flex-direction: column;
-        margin-top: 50px;
+        margin-top: 102.5px;
         background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
         animation: glowing 20s linear infinite;
         background-size: 400%;
@@ -273,10 +273,6 @@ const current = Astro.url.pathname;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-        }
-        .logobox{
-            display: flex;
-            white-space: nowrap;
         }
         .nav-trigger {
             display: none;
