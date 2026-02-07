@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import logo from '../assets/astro.svg';
-import mask from '../assets/sprite-mask.png';
+import Stylishbutton from './Stylishbutton.astro';
 
 type link = {
     href: string;
@@ -38,15 +38,9 @@ const current = Astro.url.pathname;
                 {links.map(link => (
                     <a class={link.href == current ? "nav-link active-link" : "nav-link"} href={link.href} aria-label={link.ariaLabel}>{link.label}</a>
                 ))}
-            </div>
-            <div class="button-container">
-                <span class="mas">Book Now</span>
-                <a href="/contact" style={
-                    `mask: url(${mask.src});
-                    -webkit-mask: url(${mask.src})
-                    mask-size: 3000% 100%;
-                    -webkit-mask-size: 3000% 100%;`
-                }>Book Now</a>
+                <div class="sbutton">
+                    <Stylishbutton text="Book Now">
+                </div>
             </div>
         </nav>
     </div>
@@ -99,6 +93,11 @@ const current = Astro.url.pathname;
         background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
         animation: glowing 20s linear infinite;
         background-size: 400%;
+    }
+    .sbutton {
+        padding-top: 20px;
+        padding-right: auto;
+        background: var(--nav-bg-active);
     }
 
     /* https://codepen.io/adubiel/pen/yyWEVo */
@@ -180,94 +179,6 @@ const current = Astro.url.pathname;
 
     body.nav--active .nav {
         transform: translateX(59%);  
-    }
-
-    /* https://codepen.io/pizza3/pen/qmerBv */
-    .button-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 31.2px; 
-        position: relative;
-        overflow: hidden;
-        border: 1px solid #000;
-        transition: 0.5s;
-        margin-right: auto;
-        padding: 3px 0px;
-        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-        background-size: 400%;
-        animation: glowing 20s linear infinite;
-        margin-top: 20px;
-    }
-
-    .button-container a {
-        width: 101%;
-        height: 100%;
-        background: #000;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        animation: ani2 0.7s steps(29) forwards;
-        padding: 23px;
-    }
-
-    .button-container a:hover {
-        animation: ani 0.7s steps(29) forwards;
-    }
-    .mas {
-        position: absolute;
-        color: var(--darker-color);
-        text-align: center;
-        width: 101%;
-        overflow: hidden;
-    }
-
-    @-webkit-keyframes ani {
-        from {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
-        }
-
-        to {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-    }
-
-    @keyframes ani {
-        from {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
-        }
-
-        to {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-    }
-
-    @-webkit-keyframes ani2 {
-        from {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-
-        to {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
-        }
-    }
-
-    @keyframes ani2 {
-        from {
-        -webkit-mask-position: 100% 0;
-        mask-position: 100% 0;
-        }
-
-        to {
-        -webkit-mask-position: 0 0;
-        mask-position: 0 0;
-        }
     }
 
     @media (min-width: 768px) {
@@ -358,9 +269,10 @@ const current = Astro.url.pathname;
             position: absolute;
             flex-direction: row;
         }
-        .button-container {
+        .sbutton {
             margin-right: 20px;
-            margin-top: 0;
+            padding-top: 0;
+            padding-right: 0;
         }
     }
 </style>
