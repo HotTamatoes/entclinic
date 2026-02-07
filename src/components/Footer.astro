@@ -44,22 +44,24 @@ import Stylishbutton from './Stylishbutton.astro';
         background-color: var(--footer-bg);
         color: var(--footer-color);
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         min-height: 350px;
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
-        padding: 0 8rem;
+        padding: 0 3rem;
     }
 
     .address {
         display: flex;
         flex-direction: column;
+        margin-right: auto;
     }
     .footerLinks {
         display: flex;
         flex-direction: column;
         justify-content: right;
+        margin-left: auto;
     }
 
     .policySection {
@@ -126,6 +128,13 @@ import Stylishbutton from './Stylishbutton.astro';
 
     .icon-bubble:hover:before {
         top: 0;
+    }
+
+    @media (min-width: 768px) {
+        .footerbar {
+            flex-direction: row;
+            padding: 0 8rem;
+        }
     }
 
 </style>
