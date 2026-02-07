@@ -9,7 +9,7 @@ import '../styles/global.css';
 <Layout>
 	<div class="index-page">
 		<div class="scenery-box">
-			<Image class="scenery-image" src={scenery} alt="Scenery" inferSize/>
+			<Image class="scenery-image" src={scenery} alt="Scenery" inferSize loading="eager"/>
 			<div class="scenery-overlay">
 				This ENT Clinic will change your life!
 			</div>
@@ -35,6 +35,7 @@ import '../styles/global.css';
 	.scenery-box {
 		width: 100%;
 		overflow: hidden;
+		position: relative;
 	}
 	.scenery-image {
 		width: 100%;
@@ -43,10 +44,10 @@ import '../styles/global.css';
 	}
 	.scenery-overlay {
 		color: #fff;
-		font-size: 4rem;
+		font-size: clamp(1rem, 4vw ,4rem);
 		font-weight: bold;
 		position: absolute;
-		top: 12%;
+		top: 50%;
 		left: 10%;
 		z-index: 1;
 	}
@@ -60,13 +61,14 @@ import '../styles/global.css';
 	.nz-box {
 		width: 100%;
 		overflow: hidden;
+		position: relative;
 	}
 	.nz-overlay {
 		color: #fff;
-		font-size: 4rem;
+		font-size: clamp(1rem, 4vw, 4rem);
 		font-weight: bold;
 		position: absolute;
-		top: 85%;
+		top: 68%;
 		left: 10%;
 		z-index: 1;
 	}

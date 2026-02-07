@@ -1,27 +1,35 @@
 ---
 import '../styles/global.css';
 ---
-
-<div class="footer">
-    <div class="address">
-
+<footer>
+    <div class="footerbar">
+        <div class="address">
+                1234 Tamaki Drive, Auckland, New Zealand, 1010, https://testent.movie-router.com, +64 155 555 5678
+        </div>
+        <div class="footerLinks">
+            <div class="policySection">
+                Privacy Policy, Terms of Service, Coloring Book
+            </div>
+            <div class="buttons">
+                Contact Us, Review Us
+            </div>
+            <div class="socials">
+                Facebook, Twitter, Bluesky
+            </div>
+        </div>
     </div>
-    <div class="footerLinks">
-        <div class="policySection">
-
-        </div>
-        <div class="buttons">
-
-        </div>
-        <div class="socials">
-
-        </div>
-    </div>
-</div>
+</footer>
 
 <style>
-    .footer {
-        background-color: var();
+    .footerbar {
+        background-color: var(--footer-bg);
+        color: var(--footer-color);
+        display: flex;
+        flex-direction: row;
+        height: 100px;
+        width: 100dvw;
+        left: 0;
+        right: 0;
     }
 
 </style>

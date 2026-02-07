@@ -18,6 +18,8 @@
     --button-hover: hsla(237,100%,70%,1);
     --nav-bg-active: hsla(0,0%,80%,1);
     --nav-color: hsla(0,0%,0%,1);
+    --footer-bg: hsla(0,0%,100%,1);
+    --footer-color: hsla(0,0%,0%,1);
     
     --duration: 300ms;
     --ease: ease-in-out;
@@ -48,7 +50,7 @@ img {
     display: block;
 }
 
-@media (prefers-color-scheme: light) {
+/*@media (prefers-color-scheme: light) {
     :root {
         --text-color: hsla(0,0,89, 1);
         --primary-color: hsla(0,0,14,1);
@@ -58,4 +60,4 @@ img {
         --hover-color: hsla(0,0,75,1);
         --button-hover: hsla(237,100,70,1);
     }
-}
+}/*
