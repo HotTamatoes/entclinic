@@ -39,7 +39,10 @@ if (current !== '/') {
         <nav class="nav">
             <div class="linkbox">
                 {links.map(link => (
-                    <a class={link.href == current ? "nav-link active-link" : "nav-link"} href={link.href} aria-label={link.ariaLabel}>{link.label}</a>
+                    <a class="nav-link" href={link.href} aria-label={link.ariaLabel}>
+                        {link.label}
+                        <div class={link.href == current ? "rainbow-underline active-link" : "rainbow-underline"}></div>
+                    </a>
                 ))}
                 <div class="sbutton">
                     <Stylishbutton text="Book Now">
@@ -233,26 +236,14 @@ if (current !== '/') {
             border: 2px solid blue;*/
         }
 
-        .active-link::before {
+        .active-link {
             position: absolute;
-            content: '';
             top: 0;
             left: 1px;
-            filter: none;
             background: linear-gradient(45deg, #00ffd5, #002bff, #7a00ff, #ff00c8);
             width: calc(100% - 2px);
             height: calc(100% + 2px);
-            opacity: 1;
             z-index: -1;
-        }
-
-        .active-link:hover:before {
-            top: -2px;
-            left:-2px;
-            filter: blur(5px);
-            width: calc(100% + 6px);
-            height: calc(100% + 6px);
-            transition: opacity .3s ease-in-out;
             border-radius: 4px;
         }
 
