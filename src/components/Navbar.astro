@@ -201,6 +201,7 @@ const logoImageStyle= `background-image: url('${logoImage.src}'); background-siz
         display: flex;
         flex-direction: column;
         margin-top: 102.5px;
+        width: 41dvw;
         background: linear-gradient(45deg,#00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
         position: relative;
     }
@@ -299,12 +300,14 @@ const logoImageStyle= `background-image: url('${logoImage.src}'); background-siz
         flex-direction: column;
         position: absolute;
         top: 0;
-        left: 50%;
+        left: 100%;
         right: 0;
         height: 100%;
+        width: 100%;
         background-color: var(--nav-bg-active);
         transition: left 300ms ease-in-out;
         z-index: 11;
+        white-space: wrap;
     }
     .dropdown-right {
         display: block;
