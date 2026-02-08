@@ -99,6 +99,8 @@ if(spleet.length >= 3) current = spleet[1];
 <script>
     const trigger = document.querySelector('.nav-trigger');
     trigger?.addEventListener('click', () => {
+        const active = document.querySelector('.dropdown--active');
+        active?.classList.remove('dropdown--active')
         document.body.classList.toggle('nav--active');
     });
 </script>
