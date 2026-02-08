@@ -19,7 +19,10 @@ const links: link[] = [
     { href: '/learn', ariaLabel: 'learn', label: 'Learn' }
 ];
 
-const current = Astro.url.pathname;
+let current = Astro.url.pathname;
+if (current !== '/') {
+    current = current.endsWith('/') ? current.slice(0,-1) : current;
+}
 ---
 
 <nav>
@@ -230,7 +233,7 @@ const current = Astro.url.pathname;
             border: 2px solid blue;*/
         }
 
-        .active-link:before {
+        .active-link::before {
             position: absolute;
             content: '';
             top: 0;
