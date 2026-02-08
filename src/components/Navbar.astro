@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import logo from '../assets/logo.svg';
 import Stylishbutton from './Stylishbutton.astro';
+import {getImage} from 'astro:assets';
 
 type link = {
     href: string;
@@ -32,14 +33,19 @@ if (current !== '/') { //leave out any trailing slashes
 }
 const spleet = current.split('/');
 if(spleet.length >= 3) current = spleet[1];
+const logoImage = await getImage({src: logo, width: 146, height:50});
+const logoImageStyle= `background-image: url('${logoImage.src}'); background-size: 146px 50px;`;
 ---
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <nav>
     <div class="headbar">
         <div class="logobox">
-            <a href="/">
-                <img src={logo.src} class="logo" alt="MovieRouterLogo" />
+            <a href="/" class="split-image-container">
+                <div class="quad quad1" style={logoImageStyle}></div>
+                <div class="quad quad2" style={logoImageStyle}></div>
+                <div class="quad quad3" style={logoImageStyle}></div>
+                <div class="quad quad4" style={logoImageStyle}></div>
             </a>
             <a href="/" style={{ color: 'var(--text-color)' }}>
                 <h1 class="caveat"></h1>
@@ -116,6 +122,60 @@ if(spleet.length >= 3) current = spleet[1];
 </script>
 
 <style>
+    /* https://codepen.io/nefejames/pen/azoOyyz */
+    .split-image-container {
+        position: relative;
+        height: 50px;
+        width: 146px;
+        margin: 20px;
+    }
+
+    .quad {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        transition: transform 0.3s ease;
+    }
+
+    .quad1 {
+        top: 0;
+        left: 0;
+        background-position: top left;
+    }
+
+    .quad2 {
+        top: 0;
+        right: 0;
+        background-position: top right;
+    }
+
+    .quad3 {
+        bottom: 0;
+        left: 0;
+        background-position: bottom left;
+    }
+
+    .quad4 {
+        bottom: 0;
+        right: 0;
+        background-position: bottom right;
+    }
+
+    .split-image-container:hover .quad1 {
+        transform: translate(-10px, -10px);
+    }
+
+    .split-image-container:hover .quad2 {
+        transform: translate(10px, -10px);
+    }
+
+    .split-image-container:hover .quad3 {
+        transform: translate(-10px, 10px);
+    }
+
+    .split-image-container:hover .quad4 {
+        transform: translate(10px, 10px);
+    }
 
     .headbar {
         position: fixed;
@@ -137,17 +197,6 @@ if(spleet.length >= 3) current = spleet[1];
         display: flex;
         white-space: nowrap;
     }
-
-    .logo {
-        height: 4em;
-        padding: 1em;
-        will-change: filter;
-        transition: filter 300ms;
-    }
-    .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-    }
-    
     .linkbox {
         display: flex;
         flex-direction: column;
@@ -375,7 +424,7 @@ if(spleet.length >= 3) current = spleet[1];
             width: max-content;
             background-color: var(--darker-color);
             transition: unset;
-            padding-top: 67px;
+            padding-top: 65px;
             z-index: -10;
         }
         .dropdown-links .nav-link {
