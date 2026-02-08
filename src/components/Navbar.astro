@@ -8,11 +8,18 @@ type link = {
     ariaLabel: string;
     label: string;
 };
-
+const aboutLinks: link[] = [
+    { href: '/about/your-ears', ariaLabel: 'your ears', label: 'Your Ears' },
+    { href: '/about/hearing-loss', ariaLabel: 'hearing loss', label: 'Hearing Loss' },
+    { href: '/about/hearing-aids', ariaLabel: 'hearing aids', label: 'Hearing Aids' },
+    { href: '/about/funding-options', ariaLabel: 'funding options', label: 'Funding Options' },
+    { href: '/about/faq', ariaLabel: 'frequently asked questions', label: 'FAQs' }
+]
+const tinnitusLinks: link[] = [
+    { href: '/tinnitus/learn-about-tinnitus', ariaLabel: 'learn about tinnitus', label: 'Learn About Tinnitus' },
+    { href: '/tinnitus/specialist-tinnitus-services', ariaLabel: 'specialist tinnitus services', label: 'Specialist Tinnitus Services' }
+]
 const links: link[] = [
-    { href: '/', ariaLabel: 'home', label: 'Home' },
-    { href: '/about', ariaLabel: 'about', label: 'About' },
-    { href: '/tinnitus', ariaLabel: 'tinnitus', label: 'Tinnitus' },
     { href: '/stories', ariaLabel: 'stories', label: 'Stories' },
     { href: '/services', ariaLabel: 'services', label: 'Services' },
     { href: '/specialists', ariaLabel: 'specialists', label: 'Specialists' },
@@ -20,10 +27,13 @@ const links: link[] = [
 ];
 
 let current = Astro.url.pathname;
-if (current !== '/') {
+if (current !== '/') { //leave out any trailing slashes
     current = current.endsWith('/') ? current.slice(0,-1) : current;
 }
+const spleet = current.split('/');
+if(spleet.length >= 3) current = spleet[1];
 ---
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <nav>
     <div class="headbar">
@@ -38,6 +48,40 @@ if (current !== '/') {
         <a class="nav-trigger" href="#" aria-label="Toggle navigation"><span class="nav-icon"></span></a>
         <nav class="nav">
             <div class="linkbox">
+                <a class="nav-link" href='/' aria-label='home'>
+                    Home
+                    <div class={'/' == current ? "rainbow-underline active-link" : "rainbow-underline"}></div>
+                </a>
+                <div class="dropdown nav-link">
+                    <span class="dropdown-right">About <i class="fa-solid fa-caret-right"></i></span>
+                    <span class="dropdown-down">About <i class="fa-solid fa-caret-down"></i></span>
+                    <span class="dropdown-up">About <i class="fa-solid fa-caret-up"></i></span>
+                    <div class="dropdown-links">
+                        <div class="left-arrow"><i class="fa-solid fa-caret-left"></i> Main Menu</div>
+                        {aboutLinks.map(link => (
+                            <a class="nav-link" href={link.href} aria-label={link.ariaLabel}>
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+                    <div class={ "about" == current ? "rainbow-underline active-link" : "rainbow-underline"}></div>
+                </div>
+                <div class="dropdown nav-link">
+                    <span class="dropdown-right">
+                    Tinnitus <i class="fa-solid fa-caret-right"></i></span>
+                    <span class="dropdown-down">Tinnitus <i class="fa-solid fa-caret-down"></i></span>
+                    <span class="dropdown-up">Tinnitus <i class="fa-solid fa-caret-up"></i></span>
+                    <div class="dropdown-links">
+                        <div class="left-arrow"><i class="fa-solid fa-caret-left"></i> Main Menu</div>
+                        {tinnitusLinks.map(link => (
+                            <a class="nav-link" href={link.href} aria-label={link.ariaLabel}>
+                                {link.label}
+                                <div class={link.href == current ? "rainbow-underline active-link" : "rainbow-underline"}></div>
+                            </a>
+                        ))}
+                    </div>
+                    <div class={ "tinnitus" == current ? "rainbow-underline active-link" : "rainbow-underline"}></div>
+                </div>
                 {links.map(link => (
                     <a class="nav-link" href={link.href} aria-label={link.ariaLabel}>
                         {link.label}
@@ -56,6 +100,16 @@ if (current !== '/') {
     const trigger = document.querySelector('.nav-trigger');
     trigger?.addEventListener('click', () => {
         document.body.classList.toggle('nav--active');
+    });
+</script>
+<script>
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener('click', () => {
+            const active = document.querySelector('.dropdown--active');
+            active?.classList.remove('dropdown--active')
+            if (active != dropdown) dropdown.classList.add('dropdown--active');
+        });
     });
 </script>
 
@@ -97,6 +151,7 @@ if (current !== '/') {
         flex-direction: column;
         margin-top: 102.5px;
         background: linear-gradient(45deg,#00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+        position: relative;
     }
     .sbutton {
         padding-top: 20px;
@@ -174,17 +229,49 @@ if (current !== '/') {
         transform: rotate(45deg);hsla(0,0%,100%,1);
         background: hsla(0,0%,0%,1);
     }
-
     body.nav--active .nav-icon::after {
         margin-top: 0;
         transform: rotate(-45deg);
         background: hsla(0,0%,0%,1);
     }
-
     body.nav--active .nav {
         transform: translateX(59%);  
     }
-
+    .dropdown {
+        cursor: pointer;
+        user-select: none;
+        display: block;
+    }
+    .dropdown-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        right: 0;
+        height: 100%;
+        background-color: var(--nav-bg-active);
+        transition: left 300ms ease-in-out;
+        z-index: 11;
+    }
+    .dropdown-right {
+        display: block;
+    }
+    .dropdown-down {
+        display: none;
+    }
+    .left-arrow {
+        display: block;
+        padding-left: 20px;
+        background-color: var(--nav-bg-active);
+        right: 0;
+    }
+    .dropdown-up {
+        display: none;
+    }
+    .dropdown--active .dropdown-links {
+        left: 0;
+    }
     @media (min-width: 768px) {
         .warning {
             display: block;
@@ -229,11 +316,6 @@ if (current !== '/') {
             top: 0;
             background: var(--darker-color);
             border-radius: 4px;
-            /*box-sizing: border-box;
-            border: 1px solid hsla(0,0%,0%,1);
-        }
-        .active-link:after {
-            border: 2px solid blue;*/
         }
 
         .active-link {
@@ -247,7 +329,7 @@ if (current !== '/') {
             border-radius: 4px;
         }
 
-        .nav-link:hover:before {
+        .dropdown--active:before, .nav-link:hover:before {
             opacity: 1;
         }
         .nav-link:hover {
@@ -280,6 +362,51 @@ if (current !== '/') {
             margin-right: 20px;
             padding-top: 0;
             padding-right: 0;
+        }
+        .dropdown-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            justify-content: center;
+            right: unset;
+            height: unset;
+            width: max-content;
+            top: 67px;
+            background-color: var(--darker-color);
+            z-index: 11;
+            transition: unset;
+        }
+        .dropdown-links .nav-link {
+            margin: 0;
+        }
+        .dropdown-links .nav-link:hover:before {
+            opacity: 0;
+        }
+        .dropdown-links .nav-link:hover {
+            background-color: #ddd;
+        }
+        .left-arrow {
+            display: none;
+        }
+        .dropdown-down {
+            display: block;
+        }
+        .dropdown-right {
+            display: none;
+        }
+        .dropdown--active .dropdown-links {
+            display: flex;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        .dropdown--active .dropdown-left {
+            display: none;
+        }
+        .dropdown--active .dropdown-up {
+            display: block;
+        }
+        .dropdown--active .dropdown-down {
+            display: none;
         }
     }
 </style>
