@@ -229,6 +229,30 @@ const current = Astro.url.pathname;
         .active-link:after {
             border: 2px solid blue;*/
         }
+
+        .active-link:before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            filter: none;
+            background: linear-gradient(45deg, #00ffd5, #002bff, #7a00ff, #ff00c8);
+            width: 100%;
+            height: calc(100% + 2px);
+            opacity: 1;
+            z-index: -1;
+        }
+
+        .active-link:hover:before {
+            top: -2px;
+            left:-2px;
+            filter: blur(5px);
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            transition: opacity .3s ease-in-out;
+            border-radius: 4px;
+        }
+
         .nav-link:hover:before {
             opacity: 1;
         }
