@@ -26,13 +26,19 @@ import Stylishbutton from './Stylishbutton.astro';
             </div>
             <div class="socials">
                 <a href="#" class="icon-bubble facebook">
-                    <i class="fab fa-facebook-f icon"></i>
+                    <div class="icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
                 </a>
                 <a href="#" class="icon-bubble twitter">
-                    <i class="fab fa-twitter icon"></i>
+                    <div class="icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
                 </a>
                 <a href="#" class="icon-bubble bluesky">
-                    <i class="fab fa-bluesky icon"></i>
+                    <div class="icon">
+                        <i class="fab fa-bluesky"></i>
+                    </div>
                 </a>
             </div>
         </div>
@@ -81,6 +87,8 @@ import Stylishbutton from './Stylishbutton.astro';
     }
     .socials {
         margin-top: 15px;
+        display: flex;
+        flex-direction: row;
     }
 
     /* https://codepen.io/ephs23/pen/NeQZGx */
@@ -88,11 +96,8 @@ import Stylishbutton from './Stylishbutton.astro';
         width: 40px;
         height: 40px;
         background-color: #bbb;
-        text-align: center;
-        line-height: 38px;
-        font-size: 25px;
-        margin: 0 10px;
-        display: inline-block;
+        margin: 0 1rem;
+        display: block;
         border-radius: 50%;
         position: relative;
         overflow: hidden;
@@ -101,10 +106,14 @@ import Stylishbutton from './Stylishbutton.astro';
     }
 
     .icon-bubble .icon {
+        text-align: center;
+        font-size: 25px;
         position: relative;
         color: var(--footer-bg);
         transition: 0.5s;
         z-index: 3;
+        height: 100%;
+        width: 100%;
     }
 
     .icon-bubble:hover .icon {
