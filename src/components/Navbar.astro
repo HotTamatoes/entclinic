@@ -111,6 +111,12 @@ const logoImageStyle= `background-image: url('${logoImage.src}'); background-siz
     });
 </script>
 <script>
+    const links = document.querySelectorAll('.dropdown-links')
+    links.forEach( (link)=> {
+            link.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+        });
+    });
     const dropdowns = document.querySelectorAll('.dropdown');
     dropdowns.forEach((dropdown) => {
         dropdown.addEventListener('click', () => {
