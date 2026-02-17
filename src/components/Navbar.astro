@@ -58,7 +58,7 @@ const logoImageStyle= `background-image: url('${logoImage.src}'); background-siz
                     Home
                     <div class={'/' == current ? "rainbow-underline active-link" : "rainbow-underline"}></div>
                 </a>
-                <div class="dropdown nav-link">
+                <div class="dropdown nav-link" tabindex="0">
                     <span class="dropdown-right">About <i class="fa-solid fa-caret-right"></i></span>
                     <span class="dropdown-down">About <i class="fa-solid fa-caret-down"></i></span>
                     <span class="dropdown-up">About <i class="fa-solid fa-caret-up"></i></span>
@@ -72,7 +72,7 @@ const logoImageStyle= `background-image: url('${logoImage.src}'); background-siz
                     </div>
                     <div class={ "about" == current ? "rainbow-underline active-link" : "rainbow-underline"}></div>
                 </div>
-                <div class="dropdown nav-link">
+                <div class="dropdown nav-link" tabindex="0">
                     <span class="dropdown-right">
                     Tinnitus <i class="fa-solid fa-caret-right"></i></span>
                     <span class="dropdown-down">Tinnitus <i class="fa-solid fa-caret-down"></i></span>
@@ -114,9 +114,10 @@ const logoImageStyle= `background-image: url('${logoImage.src}'); background-siz
     const dropdowns = document.querySelectorAll('.dropdown');
     dropdowns.forEach((dropdown) => {
         dropdown.addEventListener('click', () => {
-            const active = document.querySelector('.dropdown--active');
-            active?.classList.remove('dropdown--active')
-            if (active != dropdown) dropdown.classList.add('dropdown--active');
+            dropdown.classList.toggle('dropdown--active');
+        });
+        dropdown.addEventListener('blur', () => {
+            dropdown.classList.remove('dropdown--active');
         });
     });
 </script>
